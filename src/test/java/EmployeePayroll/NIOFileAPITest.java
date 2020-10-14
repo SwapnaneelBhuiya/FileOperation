@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 import java.util.stream.IntStream;
 
 import org.junit.Test;
@@ -43,7 +44,12 @@ public class NIOFileAPITest {
 		});
 		
 	}
-
+	@Test
+	public void givenDirectoryWhenWatchedListsAllActivities() throws IOException {
+		Path dir = Paths.get(HOME + "/" + PLAY_WITH_NIO);
+		Files.list(dir).filter(Files::isRegularFile).forEach(System.out::println);
+		new Java8WatchServiceSample(dir).processEvents();
+	}
 	@Test
 	public void given3EmployeesWhenWrittentoFileShouldMatchEmployeeEntries() {
 		ArrayList<EmployeePayrollData> ar = new ArrayList<>();
@@ -57,11 +63,13 @@ public class NIOFileAPITest {
 		long entries = emp.countEntries(EmployeePayrollService.IOService.FILE_IO);
 		Assert.assertEquals(3, entries);
 	}
-
 	@Test
-	public void givenDirectoryWhenWatchedListsAllActivities() throws IOException {
-		Path dir = Paths.get(HOME + "/" + PLAY_WITH_NIO);
-		Files.list(dir).filter(Files::isRegularFile).forEach(System.out::println);
-		new Java8WatchServiceSample(dir).processEvents();
+	public void givenFileOnReadingFromFilrShouldMatchEmployeeCount()
+	{
+		EmployeePayrollService employeePayrollService=new EmployeePayrollService();
+		Scanner sc=new Scanner(System.in);
+		//employeePayrollService.readEmployeePayrollData(sc);
+		long entries = employeePayrollService.countEntries(EmployeePayrollService.IOService.FILE_IO);
+		Assert.assertEquals(3, entries);
 	}
 }

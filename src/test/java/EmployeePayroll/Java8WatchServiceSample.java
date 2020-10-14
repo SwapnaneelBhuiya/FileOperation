@@ -32,6 +32,7 @@ public class Java8WatchServiceSample {
 	private void registerDirWatchers(Path dir) throws IOException
 	{
 		WatchKey key=dir.register(watcher, ENTRY_GATE, ENTRY_DELETE, ENTRY_MODIFY);
+		if(!(key==null))
 		dirWatchers.put(key, dir);
 	}
 	//Register the given directory and all its sub-directories with WatchService

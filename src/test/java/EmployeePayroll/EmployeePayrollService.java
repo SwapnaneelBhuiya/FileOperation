@@ -4,6 +4,7 @@ package EmployeePayroll;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.*;
 	import java.util.Scanner;
@@ -39,7 +40,7 @@ import java.util.*;
 			System.out.println("Writing Employee payroll roaster to console"+employeePayrollList);
 			}
 			else if(ioService.equals(IOService.FILE_IO))
-				new EmployeePayrollFileIOService.writeData(employeePayrollList);
+				writeData(employeePayrollList);
 		}
 		public void printData(IOService fileIo) {
 			try {
@@ -50,11 +51,22 @@ import java.util.*;
 		public long countEntries(IOService fileIo) {
 			long entries=0;
 			try {
-				entries=Files.lines(new File("user.home").toPath()).count();
+				entries=Files.lines(new File("payroll-file.txt").toPath()).count();
 				
 			}
 			catch(Exception e) {}
 			return entries;
 		}
-		
+		public void writeData(ArrayList<EmployeePayrollData> employeePayrollList)
+		{
+			StringBuffer empBuffer=new StringBuffer();
+			employeePayrollList.forEach(employee-> {
+				String employeeDataString=employee.toString().concat("\n");
+				empBuffer.append(employeeDataString);
+			});
+			try {
+				Files.write(Paths.get(PAYROLL_FILE_NAME),empBuffer.toString().getBytes());
+			}
+			catch(IOException e) {}
+		}
 	}
