@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.*;
 	import java.util.Scanner;
 	public class EmployeePayrollService {
-		public static String PAYROLL_FILE_NAME="payroll";
 		public enum IOService{CONSOLE_IO,FILE_IO, DB_IO,REST_IO}
 		private ArrayList<EmployeePayrollData> employeePayrollList;
+		public static String PAYROLL_FILE_NAME="payroll-file.txt";
 		public EmployeePayrollService() {}
 		public EmployeePayrollService(ArrayList<EmployeePayrollData> employeePayrollList)
 		{this.employeePayrollList=employeePayrollList;
@@ -43,7 +43,7 @@ import java.util.*;
 		}
 		public void printData(IOService fileIo) {
 			try {
-				Files.lines(new File("user.home").toPath()).forEach(System.out::println);
+				Files.lines(new File("payroll-file.txt").toPath()).forEach(System.out::println);
 			}
 			catch(IOException e) {}
 		}
@@ -58,4 +58,3 @@ import java.util.*;
 		}
 		
 	}
-	
