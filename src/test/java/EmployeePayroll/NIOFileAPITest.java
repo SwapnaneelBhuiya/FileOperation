@@ -57,4 +57,11 @@ public void given3EmployeesWhenWrittentoFileShouldMatchEmployeeEntries()
 	long entries=emp.countEntries(EmployeePayrollService.IOService.FILE_IO);
 	Assert.assertEquals(3, entries);
 	}
+@Test
+public void givenDirectoryWhenWatchedListsAllActivities() throws IOException
+{
+	Path dir = Paths.get(HOME+"/"+PLAY_WITH_NIO);
+	Files.list(dir).filter(Files::isRegularFile).forEach(System.out::println);
+	new Java8WatchServiceSample(dir).processEvents();
+}
 }

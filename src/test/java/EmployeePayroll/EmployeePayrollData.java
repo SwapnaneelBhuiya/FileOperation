@@ -10,4 +10,8 @@ public class EmployeePayrollData {
 		this.name=name;
 		this.salary=salary;
 	}
+	public String toString()
+	{
+		return "id: "+id+" name "+name+" salary "+salary;
+	}
 }
