@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.*;
 	import java.util.Scanner;
 	public class EmployeePayrollService {
-		public static String PAYROLL_FILE_NAME="user.home";
+		public static String PAYROLL_FILE_NAME="payroll";
 		public enum IOService{CONSOLE_IO,FILE_IO, DB_IO,REST_IO}
 		private ArrayList<EmployeePayrollData> employeePayrollList;
 		public EmployeePayrollService() {}
@@ -21,7 +21,6 @@ import java.util.*;
 			EmployeePayrollService employeePayrollService=new EmployeePayrollService(employee);
 			Scanner sc=new Scanner(System.in);
 			employeePayrollService.readEmployeePayrollData(sc);
-			//employeePayrollService.writeEmployeePayrollData();
 		}
 		public void readEmployeePayrollData(Scanner sc)
 		{
@@ -35,7 +34,12 @@ import java.util.*;
 		}
 		public void writeEmployeePayrollData(EmployeePayroll.EmployeePayrollService.IOService ioService)
 		{
+			if(ioService.equals(IOService.CONSOLE_IO))
+			{
 			System.out.println("Writing Employee payroll roaster to console"+employeePayrollList);
+			}
+			else if(ioService.equals(IOService.FILE_IO))
+				new EmployeePayrollFileIOService.writeData(employeePayrollList);
 		}
 		public void printData(IOService fileIo) {
 			try {
