@@ -42,26 +42,26 @@ public class NIOFileAPITest {
 			Assert.assertTrue(Files.exists(tempFile));
 		});
 		
-		}
-@Test
-public void given3EmployeesWhenWrittentoFileShouldMatchEmployeeEntries()
-{
-	ArrayList<EmployeePayrollData> ar=new ArrayList<>();
-			ar.add(new EmployeePayrollData(1,"Jeff",10000.0));
-			ar.add(new EmployeePayrollData(2,"Bill",200000));
-			ar.add(new EmployeePayrollData(3,"Sam",311111));
-	EmployeePayrollService emp;
-	emp=new EmployeePayrollService(ar);
-	emp.writeEmployeePayrollData(EmployeePayrollService.IOService.FILE_IO);	
-	emp.printData(EmployeePayrollService.IOService.FILE_IO);
-	long entries=emp.countEntries(EmployeePayrollService.IOService.FILE_IO);
-	Assert.assertEquals(3, entries);
 	}
-@Test
-public void givenDirectoryWhenWatchedListsAllActivities() throws IOException
-{
-	Path dir = Paths.get(HOME+"/"+PLAY_WITH_NIO);
-	Files.list(dir).filter(Files::isRegularFile).forEach(System.out::println);
-	new Java8WatchServiceSample(dir).processEvents();
-}
+
+	@Test
+	public void given3EmployeesWhenWrittentoFileShouldMatchEmployeeEntries() {
+		ArrayList<EmployeePayrollData> ar = new ArrayList<>();
+		ar.add(new EmployeePayrollData(1, "Jeff", 10000.0));
+		ar.add(new EmployeePayrollData(2, "Bill", 200000));
+		ar.add(new EmployeePayrollData(3, "Sam", 311111));
+		EmployeePayrollService emp;
+		emp = new EmployeePayrollService(ar);
+		emp.writeEmployeePayrollData(EmployeePayrollService.IOService.FILE_IO);
+		emp.printData(EmployeePayrollService.IOService.FILE_IO);
+		long entries = emp.countEntries(EmployeePayrollService.IOService.FILE_IO);
+		Assert.assertEquals(3, entries);
+	}
+
+	@Test
+	public void givenDirectoryWhenWatchedListsAllActivities() throws IOException {
+		Path dir = Paths.get(HOME + "/" + PLAY_WITH_NIO);
+		Files.list(dir).filter(Files::isRegularFile).forEach(System.out::println);
+		new Java8WatchServiceSample(dir).processEvents();
+	}
 }
